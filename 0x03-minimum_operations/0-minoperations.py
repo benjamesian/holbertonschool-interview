@@ -3,22 +3,16 @@
 
 
 def minOperations(n):
+    """sum of prime factors"""
     if n <= 1:
         return 0
 
-    i = 1
     ops = 0
-    while i < n:
-        while n % (i * 2) == 0:
-            ops += 2
-            i *= 2
-        if i < n:
-            copied = i // 2
-            if n % i == 0:
-                ops += 1
-                copied = i
-            while i < n and n % (i * 2) != 0:
-                i += copied
-                ops += 1
+    while n > 1:
+        for p_factor in range(2, n + 1):
+            if n % p_factor == 0:
+                ops += p_factor
+                n //= p_factor
+                break
 
     return ops
