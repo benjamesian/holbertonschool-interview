@@ -12,7 +12,7 @@
  */
 int should_topple(int grid[3][3])
 {
-	int i, j;
+	size_t i, j;
 
 	for (i = 0; i < 3; i++)
 	{
@@ -32,7 +32,7 @@ int should_topple(int grid[3][3])
  */
 static void print_grid(int grid[3][3])
 {
-	int i, j;
+	size_t i, j;
 
 	for (i = 0; i < 3; i++)
 	{
@@ -53,13 +53,13 @@ static void print_grid(int grid[3][3])
  */
 void add_grids(int grid1[3][3], int grid2[3][3])
 {
-	int col, row;
+	size_t col, row;
 
-	for (col = 0; col < 3; col++)
+	for (row = 0; row < 3; row++)
 	{
-		for (row = 0; row < 3; row++)
+		for (col = 0; col < 3; col++)
 		{
-			grid1[col][row] += grid2[col][row];
+			grid1[row][col] += grid2[row][col];
 		}
 	}
 }
@@ -70,11 +70,8 @@ void add_grids(int grid1[3][3], int grid2[3][3])
  */
 void topple(int grid[3][3])
 {
-	int temp[3][3] = {
-	    {0, 0, 0},
-	    {0, 0, 0},
-	    {0, 0, 0}};
-	int i, j;
+	int temp[3][3] = {{0}};
+	size_t i, j;
 
 	for (i = 0; i < 3; i++)
 	{
