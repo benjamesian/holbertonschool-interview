@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "sandpiles.h"
+
+
 /**
  * should_topple - check if a sandpile is not stable
  * @grid: sandpile to check
