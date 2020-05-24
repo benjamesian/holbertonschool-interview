@@ -4,7 +4,7 @@
  * helper - check if a singly linked list is a palindrome
  * @pfront: pointer to a node in the list
  * @back: pointer to a node further along in the list
- * Return: 0 if not a palindrome, 2 if a palindome, 1 if still checking
+ * Return: 0 if not a palindrome, 1 if a palindome, 2 if still checking
  */
 int helper(listint_t **pfront, listint_t *back)
 {
