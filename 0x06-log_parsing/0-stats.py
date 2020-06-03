@@ -46,7 +46,7 @@ def parse_log():
         print_stats(file_size, statuses_seen)
         raise
 
-    if n_lines % 10 != 0:
+    if n_lines and n_lines % 10 != 0:
         print_stats(file_size, statuses_seen)
 
     return os.EX_OK
