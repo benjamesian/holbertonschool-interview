@@ -7,26 +7,24 @@ import sys
 STATUS_CODES = {200, 301, 400, 401, 403, 404, 405, 500}
 
 
-def parse_line(log_line):
+def parse_line(line):
     """Parse formatted log data and return values in a tuple"""
-    try:
-        reg = re.compile(
-            r'(^[.0-9]+)\s-\s\[([-:.\s0-9]+)\]\s("[^"]+")\s(\d+)\s(\d+)')
-        match = reg.match(log_line)
-        components = match.groups()
-        return components
-    except Exception:
-        return ('', '', '', '-1', '-1')
+    reg = re.compile(
+        r'(^[.0-9]+)\s-\s\[([-:.\s0-9]+)\]\s("[^"]+")\s(\d+)\s(\d+)')
+    match = reg.match(line)
+    components = match.groups()
+    return components
 
 
-def print_stats(size, status_code_data):
+def print_stats(file_size, status_code_data):
     """Print out info about log data"""
-    print("File size: {}".format(size))
+    print("File size: {}".format(file_size))
     for code in sorted(status_code_data):
         print("{}: {}".format(code, status_code_data[code]))
 
 
-if __name__ == "__main__":
+def parse_log():
+    """Parse log data being fed to stdin"""
     log_data_labels = ('ip_addr', 'date', 'req', 'status_code', 'file_size')
     statuses_seen = defaultdict(int)
     n_lines, file_size = 0, 0
@@ -45,4 +43,9 @@ if __name__ == "__main__":
         print_stats(file_size, statuses_seen)
         raise
 
-    print_stats(file_size, statuses_seen)
+    if n_lines and n_lines % 10 != 0:
+        print_stats(file_size, statuses_seen)
+
+
+if __name__ == "__main__":
+    parse_log()
