@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Practice with Parsing Log Data"""
 from collections import defaultdict
-import os
 import re
 import sys
 
@@ -17,9 +16,9 @@ def parse_line(line):
     return components
 
 
-def print_stats(file_size, status_code_data):
+def print_stats(size, status_code_data):
     """Print out info about log data"""
-    print("File size: {}".format(file_size))
+    print("File size: {}".format(size))
     for code in sorted(status_code_data):
         print("{}: {}".format(code, status_code_data[code]))
 
