@@ -9,11 +9,14 @@ STATUS_CODES = {200, 301, 400, 401, 403, 404, 405, 500}
 
 def parse_line(log_line):
     """Parse formatted log data and return values in a tuple"""
-    reg = re.compile(
-        r'(^[.0-9]+)\s-\s\[([-:.\s0-9]+)\]\s("[^"]+")\s(\d+)\s(\d+)')
-    match = reg.match(log_line)
-    components = match.groups()
-    return components
+    try:
+        reg = re.compile(
+            r'(^[.0-9]+)\s-\s\[([-:.\s0-9]+)\]\s("[^"]+")\s(\d+)\s(\d+)')
+        match = reg.match(log_line)
+        components = match.groups()
+        return components
+    except Exception:
+        return ('', '', '', '-1', '-1')
 
 
 def print_stats(size, status_code_data):
