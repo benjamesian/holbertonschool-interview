@@ -32,9 +32,9 @@ def parse_log():
             n_lines += 1
             parsed = parse_line(line)
             data = dict(zip(log_data_labels, parsed))
+            file_size += int(data['file_size'])
             if data['status_code'] in valid_codes:
                 statuses_seen[data['status_code']] += 1
-                file_size += int(data['file_size'])
                 if n_lines % 10 == 0:
                     print_stats(file_size, statuses_seen)
     except KeyboardInterrupt:
