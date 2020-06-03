@@ -1,10 +1,7 @@
 #!/usr/bin/python3
 """Practice with Parsing Log Data"""
-from collections import defaultdict
 import re
 import sys
-
-STATUS_CODES = {200, 301, 400, 401, 403, 404, 405, 500}
 
 
 def parse_line(line):
@@ -16,17 +13,18 @@ def parse_line(line):
     return components
 
 
-def print_stats(file_size, status_code_data):
+def print_stats(file_size, stats: dict):
     """Print out info about log data"""
     print("File size: {}".format(file_size))
-    for code in sorted(status_code_data):
-        print("{}: {}".format(code, status_code_data[code]))
+    print(*("{}: {}\n".format(k, v) for k, v in sorted(stats.items()) if v),
+          sep='', end='')
 
 
 def parse_log():
     """Parse log data being fed to stdin"""
     log_data_labels = ('ip_addr', 'date', 'req', 'status_code', 'file_size')
-    statuses_seen = defaultdict(int)
+    valid_codes = {"200", "301", "400", "401", "403", "404", "405", "500"}
+    statuses_seen = {key: 0 for key in valid_codes}
     n_lines, file_size = 0, 0
 
     try:
@@ -34,7 +32,7 @@ def parse_log():
             n_lines += 1
             parsed = parse_line(line)
             data = dict(zip(log_data_labels, parsed))
-            if int(data['status_code']) in STATUS_CODES:
+            if data['status_code'] in valid_codes:
                 statuses_seen[data['status_code']] += 1
                 file_size += int(data['file_size'])
                 if n_lines % 10 == 0:
