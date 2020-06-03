@@ -38,8 +38,7 @@ def parse_log():
             if line:
                 parsed = parse_line(line)
                 data = dict(zip(log_data_labels, parsed))
-                status_code = int(data['status_code'])
-                if status_code in STATUS_CODES:
+                if int(data['status_code']) in STATUS_CODES:
                     statuses_seen[data['status_code']] += 1
                     file_size += int(data['file_size'])
                     lines_read += 1
@@ -51,6 +50,7 @@ def parse_log():
         except KeyboardInterrupt:
             print_stats(file_size, statuses_seen)
             expecting_input = False
+            raise
 
     return os.EX_OK
 
