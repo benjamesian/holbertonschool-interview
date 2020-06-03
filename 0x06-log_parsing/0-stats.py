@@ -11,7 +11,7 @@ STATUS_CODES = {200, 301, 400, 401, 403, 404, 405, 500}
 def parse_line(line):
     """Parse formatted log data and return values in a tuple"""
     reg = re.compile(
-        r'(^[.0-9]+)\s-\s\[([-:.\s0-9]+)\]\s("[^"]+")\s(\d{3})\s(\d+)')
+        r'(^[.0-9]+)\s-\s\[([-:.\s0-9]+)\]\s("[^"]+")\s(\d+)\s(\d+)')
     match = reg.match(line)
     components = match.groups()
     return components
@@ -32,15 +32,16 @@ def parse_log():
 
     try:
         for line in sys.stdin:
-            if line:
-                parsed = parse_line(line)
-                data = dict(zip(log_data_labels, parsed))
-                if int(data['status_code']) in STATUS_CODES:
-                    statuses_seen[data['status_code']] += 1
-                    file_size += int(data['file_size'])
-                    n_lines += 1
-                    if n_lines % 10 == 0:
-                        print_stats(file_size, statuses_seen)
+            if not line:
+                break
+            parsed = parse_line(line)
+            data = dict(zip(log_data_labels, parsed))
+            if int(data['status_code']) in STATUS_CODES:
+                statuses_seen[data['status_code']] += 1
+                file_size += int(data['file_size'])
+                n_lines += 1
+                if n_lines % 10 == 0:
+                    print_stats(file_size, statuses_seen)
     except KeyboardInterrupt:
         print_stats(file_size, statuses_seen)
         raise
