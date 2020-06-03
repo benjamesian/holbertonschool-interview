@@ -43,8 +43,7 @@ def parse_log():
         print_stats(file_size, statuses_seen)
         raise
 
-    if n_lines and n_lines % 10 != 0:
-        print_stats(file_size, statuses_seen)
+    print_stats(file_size, statuses_seen)
 
 
 if __name__ == "__main__":
