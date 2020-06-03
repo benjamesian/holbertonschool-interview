@@ -7,11 +7,11 @@ import sys
 STATUS_CODES = {200, 301, 400, 401, 403, 404, 405, 500}
 
 
-def parse_line(line):
+def parse_line(log_line):
     """Parse formatted log data and return values in a tuple"""
     reg = re.compile(
         r'(^[.0-9]+)\s-\s\[([-:.\s0-9]+)\]\s("[^"]+")\s(\d+)\s(\d+)')
-    match = reg.match(line)
+    match = reg.match(log_line)
     components = match.groups()
     return components
 
@@ -42,5 +42,4 @@ if __name__ == "__main__":
         print_stats(file_size, statuses_seen)
         raise
 
-    if n_lines and n_lines % 10 != 0:
-        print_stats(file_size, statuses_seen)
+    print_stats(file_size, statuses_seen)
