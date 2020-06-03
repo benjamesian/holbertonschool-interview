@@ -32,14 +32,12 @@ def parse_log():
 
     try:
         for line in sys.stdin:
-            if not line:
-                break
+            n_lines += 1
             parsed = parse_line(line)
             data = dict(zip(log_data_labels, parsed))
             if int(data['status_code']) in STATUS_CODES:
                 statuses_seen[data['status_code']] += 1
                 file_size += int(data['file_size'])
-                n_lines += 1
                 if n_lines % 10 == 0:
                     print_stats(file_size, statuses_seen)
     except KeyboardInterrupt:
