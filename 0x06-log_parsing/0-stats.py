@@ -24,8 +24,7 @@ def print_stats(file_size, status_code_data):
         print("{}: {}".format(code, status_code_data[code]))
 
 
-def parse_log():
-    """Parse log data being fed to stdin"""
+if __name__ == "__main__":
     log_data_labels = ('ip_addr', 'date', 'req', 'status_code', 'file_size')
     statuses_seen = defaultdict(int)
     n_lines, file_size = 0, 0
@@ -46,9 +45,3 @@ def parse_log():
 
     if n_lines and n_lines % 10 != 0:
         print_stats(file_size, statuses_seen)
-
-    return os.EX_OK
-
-
-if __name__ == "__main__":
-    sys.exit(parse_log())
