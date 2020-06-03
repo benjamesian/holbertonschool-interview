@@ -28,29 +28,25 @@ def parse_log():
     """Parse log data being fed to stdin"""
     log_data_labels = ('ip_addr', 'date', 'req', 'status_code', 'file_size')
     statuses_seen = defaultdict(int)
-    file_size = 0
+    n_lines, file_size = 0, 0
 
-    lines_read = 0
-    expecting_input = True
-    while expecting_input:
-        try:
-            line = sys.stdin.readline()
+    try:
+        for line in sys.stdin:
             if line:
                 parsed = parse_line(line)
                 data = dict(zip(log_data_labels, parsed))
                 if int(data['status_code']) in STATUS_CODES:
                     statuses_seen[data['status_code']] += 1
                     file_size += int(data['file_size'])
-                    lines_read += 1
-                    if lines_read % 10 == 0:
+                    n_lines += 1
+                    if n_lines % 10 == 0:
                         print_stats(file_size, statuses_seen)
-            else:  # EOF
-                expecting_input = False
-                print_stats(file_size, statuses_seen)
-        except KeyboardInterrupt:
-            print_stats(file_size, statuses_seen)
-            expecting_input = False
-            raise
+    except KeyboardInterrupt:
+        print_stats(file_size, statuses_seen)
+        raise
+
+    if n_lines % 10 != 0:
+        print_stats(file_size, statuses_seen)
 
     return os.EX_OK
 
