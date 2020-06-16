@@ -15,14 +15,5 @@ int is_palindrome(unsigned long n)
 		a /= 10;
 	}
 
-	a = n;
-	while (a)
-	{
-		if (a % 10 != b % 10)
-			return (0);
-		a /= 10;
-		b /= 10;
-	}
-
-	return (!b);
+	return (b == n);
 }
