@@ -1,19 +1,22 @@
 #!/usr/bin/python3
 
 
-def validUTF8(data):
-    def check_tail_bytes(n, byte_array):
-        if len(byte_array) < n:
+def check_tail_bytes(n, byte_array):
+    """check if n bytes start with 10 in binary"""
+    if len(byte_array) < n:
+        return False
+
+    while n:
+        byte = byte_array.pop(0)
+        if byte >> 6 != 0b10:
             return False
+        n -= 1
 
-        while n:
-            byte = byte_array.pop(0)
-            if byte >> 6 != 0b10:
-                return False
-            n -= 1
+    return True
 
-        return True
 
+def validUTF8(data):
+    """check if array of UTF-8 is valid"""
     if not data:
         return False
 
