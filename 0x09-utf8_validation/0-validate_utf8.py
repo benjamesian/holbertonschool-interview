@@ -1,20 +1,19 @@
 #!/usr/bin/python3
 
 
-def check_tail_bytes(n, byte_array):
-    if len(byte_array) < n:
-        return False
-
-    while n:
-        byte = byte_array.pop(0)
-        if byte >> 6 != 0b10:
-            return False
-        n -= 1
-
-    return True
-
-
 def validUTF8(data):
+    def check_tail_bytes(n, byte_array):
+        if len(byte_array) < n:
+            return False
+
+        while n:
+            byte = byte_array.pop(0)
+            if byte >> 6 != 0b10:
+                return False
+            n -= 1
+
+        return True
+
     if not data:
         return False
 
