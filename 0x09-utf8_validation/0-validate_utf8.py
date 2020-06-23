@@ -15,15 +15,15 @@ def validUTF8(data):
                 return False
             trailing_bytes -= 1
         else:
-            if byte >> 6 == 0b10:
-                return False
             if byte >> 7 == 0:
                 continue
 
-            trailing_bytes = -1
             mask = 0b1000000
             while mask & byte:
                 mask >>= 1
-                trailing_bytes += 1 
+                trailing_bytes += 1
+            if trailing_bytes == 1:
+                return False
+            trailing_bytes -= 1
 
     return trailing_bytes == 0
