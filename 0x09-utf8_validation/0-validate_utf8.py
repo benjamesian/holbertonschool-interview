@@ -15,7 +15,7 @@ def validUTF8(data):
                 return False
             trailing_bytes -= 1
         else:
-            if not byte & 0b10000000:
+            if byte >> 7 == 0:
                 continue
             elif byte >> 3 == 0b11110:
                 trailing_bytes = 3
