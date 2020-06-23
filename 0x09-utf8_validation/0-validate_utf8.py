@@ -8,6 +8,9 @@ def validUTF8(data):
     """
     check if array of UTF-8 is valid
     """
+    if not data:
+        return False
+
     trailing_bytes = 0
     for byte in data:
         if trailing_bytes:
