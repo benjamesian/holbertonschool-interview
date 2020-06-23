@@ -1,8 +1,13 @@
 #!/usr/bin/python3
+"""
+UTF8 checking function
+"""
 
 
 def validUTF8(data):
-    """check if array of UTF-8 is valid"""
+    """
+    check if array of UTF-8 is valid
+    """
     trailing_bytes = 0
     for byte in data:
         if trailing_bytes:
