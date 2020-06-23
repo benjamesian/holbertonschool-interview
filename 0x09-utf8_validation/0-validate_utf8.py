@@ -17,6 +17,10 @@ def validUTF8(data):
         else:
             if byte >> 7 == 0:
                 continue
+            elif byte >> 1 == 0b1111110:
+                trailing_bytes = 5
+            elif byte >> 2 == 0b111110:
+                trailing_bytes = 4
             elif byte >> 3 == 0b11110:
                 trailing_bytes = 3
             elif byte >> 4 == 0b1110:
