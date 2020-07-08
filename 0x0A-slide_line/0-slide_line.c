@@ -111,12 +111,15 @@ int merge_line(int *line, size_t size, int direction)
  * @line: array of integers
  * @size: size of array
  * @direction: direction to merge/slide integers in array
- * Return: 1 if merge or slide took place, else 0
+ * Return: 1
  */
 int slide_line(int *line, size_t size, int direction)
 {
-	int shifted = shift_zeros(line, size, direction);
-	int merged = merge_line(line, size, direction);
+	if (!line)
+		return (0);
 
-	return (shifted || merged);
+	shift_zeros(line, size, direction);
+	merge_line(line, size, direction);
+
+	return (1);
 }
