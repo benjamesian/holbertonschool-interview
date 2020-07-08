@@ -9,11 +9,8 @@
  */
 int shift_zeros(int *line, size_t size, int direction)
 {
-	int tmp[size], shifted = 0;
+	int shifted = 0;
 	size_t i = 0, j = (direction == SLIDE_LEFT) ? 0 : size - 1;
-
-	for (; i < size; i++)
-		tmp[i] = 0;
 
 	if (direction == SLIDE_LEFT)
 	{
@@ -21,12 +18,14 @@ int shift_zeros(int *line, size_t size, int direction)
 		{
 			if (line[i] != 0)
 			{
-				tmp[j] = line[i];
+				line[j] = line[i];
 				j++;
 			}
 		}
 		if (j >= size || j == 0)
 			shifted = 1;
+		for (; j < size; j++)
+			line[j] = 0;
 	}
 	else if (direction == SLIDE_RIGHT)
 	{
@@ -34,16 +33,15 @@ int shift_zeros(int *line, size_t size, int direction)
 		{
 			if (line[i] != 0)
 			{
-				tmp[j] = line[i];
+				line[j] = line[i];
 				j--;
 			}
 		}
 		if (j >= size - 1)
 			shifted = 1;
+		for (; j < size; j--)
+			line[j] = 0;
 	}
-
-	for (i = 0; i < size; i++)
-		line[i] = tmp[i];
 
 	return (shifted);
 }
