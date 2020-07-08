@@ -34,9 +34,9 @@ int shift_zeros(int *line, size_t size, int direction)
 			if (line[i] != 0)
 			{
 				line[j] = line[i];
-				j--;
 				if (i != j)
 					shifted = 1;
+				j--;
 			}
 		}
 		for (; j < size; j--)
