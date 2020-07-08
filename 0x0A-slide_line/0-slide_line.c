@@ -115,6 +115,8 @@ int merge_line(int *line, size_t size, int direction)
  */
 int slide_line(int *line, size_t size, int direction)
 {
-	return (shift_zeros(line, size, direction) ||
-		merge_line(line, size, direction));
+	int shifted = shift_zeros(line, size, direction);
+	int merged = merge_line(line, size, direction);
+
+	return (shifted || merged);
 }
