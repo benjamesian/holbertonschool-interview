@@ -19,11 +19,11 @@ int shift_zeros(int *line, size_t size, int direction)
 			if (line[i] != 0)
 			{
 				line[j] = line[i];
+				if (i != j)
+					shifted = 1;
 				j++;
 			}
 		}
-		if (j >= size || j == 0)
-			shifted = 1;
 		for (; j < size; j++)
 			line[j] = 0;
 	}
@@ -35,10 +35,10 @@ int shift_zeros(int *line, size_t size, int direction)
 			{
 				line[j] = line[i];
 				j--;
+				if (i != j)
+					shifted = 1;
 			}
 		}
-		if (j >= size - 1)
-			shifted = 1;
 		for (; j < size; j--)
 			line[j] = 0;
 	}
