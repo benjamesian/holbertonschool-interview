@@ -100,10 +100,8 @@ int merge_line(int *line, size_t size, int direction)
 {
 	int merged = 0;
 
-	while (merge_line_helper(line, size, direction))
-	{
+	if (merge_line_helper(line, size, direction))
 		merged = 1;
-	}
 
 	return (merged);
 }
