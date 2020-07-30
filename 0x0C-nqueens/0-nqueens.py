@@ -56,4 +56,5 @@ if __name__ == '__main__':
     solver = NQueens(n)
     solutions = solver.solve()
     for res in solutions:
-        print(res)
+        out = [list(el) for el in res]
+        print(out)
