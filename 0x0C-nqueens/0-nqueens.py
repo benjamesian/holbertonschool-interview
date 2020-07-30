@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """0. N queens (N queens problem)"""
-from typing import List, Tuple
 
 
 class NQueens:
@@ -18,7 +17,7 @@ class NQueens:
                 return False
         return True
 
-    def helper(self, index: int, cols: List[int]):
+    def helper(self, index: int, cols):
         """Solve N-Queens problem"""
         if index == self.nqs:
             self.solutions.append(cols)
@@ -28,7 +27,7 @@ class NQueens:
             if self.valid(index):
                 self.helper(index + 1, cols + [i])
 
-    def solve(self) -> List[Tuple[int, int]]:
+    def solve(self):
         """Run recursive helper function"""
         if self.solutions is None:
             self.solutions = []
