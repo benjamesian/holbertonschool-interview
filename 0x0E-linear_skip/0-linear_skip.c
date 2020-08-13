@@ -1,5 +1,11 @@
 #include "search.h"
 
+/**
+ * linear_skip - search a skiplist for a value
+ * @list: list to search
+ * @value: value to search for
+ * Return: node with value or NULL
+ */
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
 	skiplist_t *p = list;
