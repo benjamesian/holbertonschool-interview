@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """rain collection problem"""
 
+
 def rain(walls):
     """rain collected in cups challenge"""
     out = 0
