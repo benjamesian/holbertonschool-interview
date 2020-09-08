@@ -50,5 +50,7 @@ int helper(int *array, int value, size_t left, size_t right)
  */
 int advanced_binary(int *array, size_t size, int value)
 {
+	if (!array)
+		return (-1);
 	return (helper(array, value, 0, size - 1));
 }
