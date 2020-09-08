@@ -33,21 +33,12 @@ int helper(int *array, int value, size_t left, size_t right)
 
 	if (left == right)
 		return (array[left] == value ? (int)left : -1);
-	if (left + 1 == right)
-	{
-		if (array[left] == value)
-			return (left);
-		else if (array[right] == value)
-			return (right);
-		else
-			return (-1);
-	}
 	if (array[left + mid] < value)
 		return (helper(array, value, left + mid + 1, right));
 	if (array[left + mid] > value)
 		return (helper(array, value, left, left + mid - 1));
 	else
-		return (helper(array, value, left, mid));
+		return (helper(array, value, left, left + mid));
 }
 
 /**
