@@ -24,21 +24,21 @@ void print_array(int *array, size_t size)
  */
 int helper(int *array, int value, size_t left, size_t right)
 {
-	size_t mid = (right - left) / 2;
+	size_t mid = left + (right - left) / 2;
 
 	if (left > right)
 		return (-1);
 
 	print_array(array + left, right - left + 1);
 
-	if (left == right)
-		return (array[left] == value ? (int)left : -1);
-	if (array[left + mid] < value)
-		return (helper(array, value, left + mid + 1, right));
-	if (array[left + mid] > value)
-		return (helper(array, value, left, left + mid - 1));
+	if (array[mid] == value && array[mid - 1] != value)
+		return (mid);
+	if (array[mid] < value)
+		return (helper(array, value, mid + 1, right));
+	if (array[mid] > value)
+		return (helper(array, value, left, mid - 1));
 	else
-		return (helper(array, value, left, left + mid));
+		return (helper(array, value, left, mid));
 }
 
 /**
