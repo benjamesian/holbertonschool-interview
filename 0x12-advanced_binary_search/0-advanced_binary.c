@@ -8,8 +8,7 @@
 void print_array(int *array, size_t size)
 {
 	printf("Searching in array: ");
-	do
-	{
+	do {
 		printf("%d", *array++);
 	} while (--size && printf(", "));
 	putchar('\n');
@@ -21,6 +20,7 @@ void print_array(int *array, size_t size)
  * @value: value to search for
  * @left: track index of value
  * @right: track index of value
+ * Return: index of value
  */
 int helper(int *array, int value, size_t left, size_t right)
 {
@@ -43,11 +43,11 @@ int helper(int *array, int value, size_t left, size_t right)
 			return (-1);
 	}
 	if (array[left + mid] < value)
-		return helper(array, value, left + mid + 1, right);
+		return (helper(array, value, left + mid + 1, right));
 	if (array[left + mid] > value)
-		return helper(array, value, left, left + mid - 1);
+		return (helper(array, value, left, left + mid - 1));
 	else
-		return helper(array, value, left, mid);
+		return (helper(array, value, left, mid));
 }
 
 /**
@@ -55,8 +55,9 @@ int helper(int *array, int value, size_t left, size_t right)
  * @array: array to search
  * @size: size of the array
  * @value: value to search for
+ * Return: index of value
  */
 int advanced_binary(int *array, size_t size, int value)
 {
-	return helper(array, value, 0, size - 1);
+	return (helper(array, value, 0, size - 1));
 }
