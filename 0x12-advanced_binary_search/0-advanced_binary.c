@@ -18,40 +18,36 @@ void print_array(int *array, size_t size)
 /**
  * helper - find least index of num in array
  * @array: array to search
- * @size: size of the array
  * @value: value to search for
- * @index: track index of value
+ * @left: track index of value
+ * @right: track index of value
  */
-int helper(int *array, size_t size, int value, size_t index)
+int helper(int *array, int value, size_t left, size_t right)
 {
-	size_t mid = size / 2;
+	size_t mid = (right - left) / 2;
 
-	if (size == 0)
+	if (left > right)
 		return (-1);
 
-	print_array(array, size);
+	print_array(array + left, right - left + 1);
 
-	if (array[mid] < value)
+	if (left == right)
+		return (array[left] == value ? (int)left : -1);
+	if (left + 1 == right)
 	{
-		size -= mid + 1;
-		index += 1 + size / 2;
-		return helper(array + mid + 1, size, value, index);
-	}
-	if (array[mid] > value)
-		return helper(array, mid, value, index - mid + mid / 2);
-	if (size == 2)
-	{
-		if (array[0] == value)
-			return (index - 1);
-		else if (array[1] == value)
-			return (index);
+		if (array[left] == value)
+			return (left);
+		else if (array[right] == value)
+			return (right);
 		else
 			return (-1);
 	}
-	else if (size == 1)
-		return (index);
+	if (array[left + mid] < value)
+		return helper(array, value, left + mid + 1, right);
+	if (array[left + mid] > value)
+		return helper(array, value, left, left + mid - 1);
 	else
-		return helper(array, mid + 1, value, index - mid / 2);
+		return helper(array, value, left, mid);
 }
 
 /**
@@ -62,5 +58,5 @@ int helper(int *array, size_t size, int value, size_t index)
  */
 int advanced_binary(int *array, size_t size, int value)
 {
-	return helper(array, size, value, size / 2);
+	return helper(array, value, 0, size - 1);
 }
