@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-"""Counts words"""
-
+"""Counts words count em!!!"""
 from collections import Counter, defaultdict
 import requests
 
 
 def count_words(subreddit, word_list, res=defaultdict(int), after=None):
-    """Count words"""
+    """Count words whooo"""
     agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)\
             Chrome/86.0.4240.111 Safari/537.36"
     url = f'https://www.reddit.com/r/{subreddit}/hot.json'
