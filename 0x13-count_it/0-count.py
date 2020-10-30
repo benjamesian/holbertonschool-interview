@@ -8,9 +8,9 @@ def count_words(subreddit, word_list, res=defaultdict(int), after=None):
     '''Count words whooo'''
     agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)\
             Chrome/86.0.4240.111 Safari/537.36"
-    url = f'https://www.reddit.com/r/{subreddit}/hot.json'
+    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
     if after:
-        url += f'?after={after}'
+        url += '?after={}'.format(after)
     r = requests.get(
         url,
         headers={"User-Agent": agent},
@@ -26,4 +26,4 @@ def count_words(subreddit, word_list, res=defaultdict(int), after=None):
         return count_words(subreddit, word_list, res, after)
     by_name = sorted(res.items(), key=lambda x: x[0])
     for k, v in sorted(by_name, key=lambda x: x[1], reverse=True):
-        print(f'{k}: {v}')
+        print('{}: {}'.format(k, v))
